@@ -6,6 +6,7 @@ const notes = [
   }
 ]
 var currentNoteID = 1
+var theme = false
 const readTemplate =  `
 <textarea readonly id = 'readSpace' rows="50" cols="100"></textarea>
 <button class="Cancel">Cancel</button>
@@ -130,10 +131,29 @@ function enableNewNote(){
   newNoteBtn.addEventListener('click', createNote)
 }
 
+function createToggle(){
+  const checkBox = document.querySelector('.theme-toggle')
+  checkBox.addEventListener('click', themeToggle)
+}
+
+function themeToggle(){
+  const page = document.querySelector('.main-container')
+  if (theme == false){
+    page.classList.replace('light-theme','dark-theme')
+    theme = true
+  }else if (theme == true){
+    page.classList.replace('dark-theme','light-theme')
+    theme = false
+  }
+}
 function initialize(){
   enableNewNote()
+  createToggle()
   addNoteToNav(notes[0].title)
   titleToBtn()
 }
 
 initialize()
+
+
+
