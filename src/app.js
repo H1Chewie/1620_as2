@@ -20,6 +20,7 @@ function emptyNote(temp){
 function clearArea(){
   const areaToClear = document.querySelector('.write-note-area')
   areaToClear.innerHTML = ''
+  enableNewNote()
 }
 
 function getContent(){
@@ -60,10 +61,16 @@ function saveNote(){
 
 function createNote (){
   emptyNote(template)
+  disableNewNote()
   const saveBtn = document.querySelector('.Save')
   const deleteBtn = document.querySelector('.Delete')
   saveBtn.addEventListener('click', saveNote )
   deleteBtn.addEventListener('click', clearArea)
+}
+
+function disableNewNote(){
+  const newNoteBtn = document.querySelector('.icons')
+  newNoteBtn.removeEventListener('click', createNote)
 }
 
 function enableNewNote(){
