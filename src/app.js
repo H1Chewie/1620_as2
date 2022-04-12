@@ -5,7 +5,7 @@ const notes = [
     id: 1 
   }
 ]
-
+const currentNoteID = 1
 const template = `
 <textarea id = 'noteSpace' rows="50" cols="100">Note</textarea>
 <button class="Save">Save</button>
@@ -54,9 +54,20 @@ function addNoteToArray(){
   })
 }
 
+function addNoteToNav(title){
+  const nav = document.querySelector('.notes-list')
+  const newElement = document.createElement('li')
+  newElement.className = currentNoteID
+  const newTextNode = document.createTextNode(title)
+  newElement.appendChild(newTextNode)
+  nav.appendChild(newElement)
+}
+
 function saveNote(){
+  addNoteToNav(getTitle())
   addNoteToArray()
   clearArea()
+
 }
 
 function createNote (){
