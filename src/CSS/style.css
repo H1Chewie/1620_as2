@@ -139,3 +139,19 @@ footer p {
   list-style: none;
   text-align: center;
 }
+
+.notes-list li {
+  color: var(--not-blue);
+  font-size: var(--lrg-txt);
+}
+
+button {
+  background-color: var(--not-green);
+  color: var(--not-black);
+}
+
+textarea{
+  background-color: var(--drk-white);
+  color: var(--not-black)
+}
+
