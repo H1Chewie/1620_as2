@@ -5,7 +5,7 @@ const notes = [
     id: 1 
   }
 ]
-const currentNoteID = 1
+var currentNoteID = 1
 const readTemplate =  `
 <textarea readonly id = 'readSpace' rows="50" cols="100"></textarea>
 <button class="Cancel">Cancel</button>
@@ -62,6 +62,7 @@ function addNoteToNav(title){
   const nav = document.querySelector('.notes-list')
   const newElement = document.createElement('li')
   newElement.className = currentNoteID
+  currentNoteID += 1
   const newTextNode = document.createTextNode(title)
   newElement.appendChild(newTextNode)
   nav.appendChild(newElement)
@@ -131,6 +132,8 @@ function enableNewNote(){
 
 function initialize(){
   enableNewNote()
+  addNoteToNav(notes[0].title)
+  titleToBtn()
 }
 
 initialize()
