@@ -6,6 +6,10 @@ const notes = [
   }
 ]
 const currentNoteID = 1
+const readTemplate =  `
+<textarea readonly id = 'readSpace' rows="50" cols="100"></textarea>
+<button class="Cancel">Cancel</button>
+`
 const template = `
 <textarea id = 'noteSpace' rows="50" cols="100">Note</textarea>
 <button class="Save">Save</button>
@@ -66,8 +70,44 @@ function addNoteToNav(title){
 function saveNote(){
   addNoteToNav(getTitle())
   addNoteToArray()
+  titleToBtn()
   clearArea()
+}
 
+function createReadArea(){
+  const readArea = document.querySelector('.read-note-area')
+  readArea.innerHTML = readTemplate
+}
+
+function displayReadArea(noteID){
+  createReadArea()
+  clearArea()
+  disableNewNote()
+  const cancelBtn = document.querySelector('.Cancel')
+  cancelBtn.addEventListener('click', clearReadArea)
+  var displayNote = ''
+  for (const note of notes){
+    if (noteID == note.id){
+      displayNote = note.title + '\n' + note.noteBody
+    }
+  }
+  const readArea = document.getElementById('readSpace')
+  readArea.innerHTML = displayNote
+}
+
+function titleToBtn(){
+  const noteList = document.querySelector('.notes-list')
+  const latestTitle = noteList.lastChild
+  latestTitle.addEventListener('click', (event) => {
+    const titleID = event.target.className
+    displayReadArea(titleID)
+  })
+}
+
+function clearReadArea(){
+  const readArea = document.querySelector('.read-note-area')
+  readArea.innerHTML = ''
+  enableNewNote()
 }
 
 function createNote (){
