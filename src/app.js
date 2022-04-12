@@ -22,9 +22,47 @@ function clearArea(){
   areaToClear.innerHTML = ''
 }
 
+function getContent(){
+  const textArea = document.getElementById('noteSpace')
+  return textArea.value
+}
+
+function splitContent(){
+  const unsplitContent = getContent()
+  const splitContent = unsplitContent.split("\n")
+  return splitContent
+}
+
+function getTitle(){
+  const content = splitContent()
+  return content[0]
+}
+
+function addNoteToArray(){
+  var contentBody = ''
+  splitNote = splitContent()
+  splitNote.splice(0, 1)
+  for (const i of splitNote){
+    contentBody += i
+    contentBody += '\n'
+  }
+  notes.push({
+    title: getTitle(),
+    noteBody:contentBody,
+    id:notes.length + 1
+  })
+}
+
+function saveNote(){
+  addNoteToArray()
+  clearArea()
+}
+
 function createNote (){
   emptyNote(template)
-  deleteBtn = document.querySelector('.Delete')
+  const saveBtn = document.querySelector('.Save')
+  const deleteBtn = document.querySelector('.Delete')
+  saveBtn.addEventListener('click', saveNote )
   deleteBtn.addEventListener('click', clearArea)
 }
 
